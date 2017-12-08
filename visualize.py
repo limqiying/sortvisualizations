@@ -15,7 +15,7 @@ def visualize(x):
     :return:
     """
     n = len(x)
-    fig, ax = plt.subplots(n, 1)
+    fig, ax = plt.subplots(n, 1, figsize=(5, 7))
     b = [0] * n
     steps = defaultdict(lambda: 0)     # keeps track of the number of steps for the algorithms to sort
     # keeps track of which algorithms are done sorting.
@@ -34,7 +34,7 @@ def visualize(x):
                 if not sorted_display[j]:
                     b[j].remove()   # remove existing bar plot
                     time_label = "Step Count: %s" % str(steps[j])
-                    ax[j].text(3, 8, time_label)
+                    ax[j].text(8, 8, time_label)
                     b[j] = ax[j].bar(range(x[j].size()), x[j].data(), align='center', alpha=0.5, color='green')
                     sorted_display[j] = True
             else:
@@ -71,26 +71,48 @@ def three_init(size=20, reverse=False, nearly_sorted=False, few_unique=False):
     additional parameters allows user to specify the type of array to be sorted.
     If parameters are empty, then a random array is generated.
     """
-    d = np.random.randint(0, 100, size)
     if reverse:
-        d = np.sort(d)[::-1]
+        d = reverse_array(size)
     if nearly_sorted:
-        g = np.random.choice(size, size//4)
-        d.sort()
-        for index in g:
-            d[index] = np.random.randint(0,100)
+        d = nearly_sorted_array(size)
     if few_unique:
-        d = np.array([])
-        while len(d) < size:
-            num = np.random.randint(0, 100)
-            count = np.random.randint(0, size//4)
-            d1 = np.empty(count)
-            d1.fill(num)
-            d = np.concatenate([d,d1])
-        np.random.shuffle(d)
-
+        d = few_unique_array(size)
     x = [srt.BubbleSort(data=d), srt.CocktailSort(data=d), srt.SelectionSort(data=d)]
     visualize(x)
 
 
-three_init(size=20, few_unique=True)
+def reverse_array(size):
+    """
+    generates a random array that is sorted-reverse
+    """
+    d = np.random.randint(0, 100, size)
+    return np.sort(d)[::-1]
+
+
+def nearly_sorted_array(size):
+    """
+    generates an array that is almost sorted
+    """
+    d = np.random.randint(0, 100, size)
+    g = np.random.choice(size, size // 4)
+    d.sort()
+    for index in g:
+        d[index] = np.random.randint(0, 100)
+    return d
+
+
+def few_unique_array(size):
+    """
+    generates an array where few of the elements are unique
+    """
+    d = np.array([])
+    while len(d) < size:
+        num = np.random.randint(0, 100)
+        count = np.random.randint(0, size//4)
+        d1 = np.empty(count)
+        d1.fill(num)
+        d = np.concatenate([d, d1])
+    np.random.shuffle(d)
+    return d
+
+three_init(20, reverse=True)
