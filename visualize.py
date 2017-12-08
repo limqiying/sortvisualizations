@@ -73,5 +73,5 @@ def animate_3(i):
             b[i] = ax[i].bar(range(x[i].size()), x[i].data(), align='center', alpha=0.5, color='black')
     return b,
 
-
 three_init(size=20)
+
