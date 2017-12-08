@@ -94,8 +94,9 @@ class SelectionSort(Sort):
 
     def __init__(self, data=None, size=15):
         super().__init__(data=data, size=size)
-        self._current = 0
-        self._min = 9999
+        self._current = 0   # pointer to where the algorithm is at
+        self._min = 0   # pointer to the index at where the current minimum is at
+        self._sorting_index = 0     # keeps track of the index up to where the list has been sorted
 
     def update(self):
         """
@@ -104,19 +105,17 @@ class SelectionSort(Sort):
         every time update() is called
         """
         if not self.is_sorted():
-            if self._min > self._data[self._current]:
+            # if the current index has a smaller value than the current minimum, update the current minimum
+            if self._data[self._min] > self._data[self._current]:
                 self._min = self._current
-                if self._current == self.size()-1:
-                    self._data[self._min], self._data[self._current] = self._data[self._current], self._data[self._min]
-                    self._min = 9999
-                    self._current = 0
-                self._increment_current()
-
-
-
-            # minimum_i = self._current + np.argmin(self._data[self._current:])
-            # self._data[minimum_i], self._data[self._current] = self._data[self._current], self._data[minimum_i]
-            # self._current += 1
+            # if we have reached the end of the list, then swap the smallest element we find to the front of our array
+            if self._current == self.size()-1:
+                # swap the smallest element in the list with the item at the fro
+                self._data[self._min], self._data[self._sorting_index] = self._data[self._sorting_index], self._data[self._min]
+                self._sorting_index += 1    # update sorting index since now one more element is sorted
+                self._min = self._sorting_index
+                self._current = self._sorting_index - 1
+            self._increment_current()   # increments the current counter
 
     @staticmethod
     def sort_type():

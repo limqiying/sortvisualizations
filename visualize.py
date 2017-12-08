@@ -71,6 +71,7 @@ def animate_3(i):
         else:
             x[i].update()
             b[i] = ax[i].bar(range(x[i].size()), x[i].data(), align='center', alpha=0.5, color='black')
+            b[i][x[i].get_current()].set_color('r')
     return b,
 
 
