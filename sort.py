@@ -144,7 +144,6 @@ class CocktailSort(Sort):
         self._end = self.size()
 
     def update(self):
-        print(self._start)
         """
         implements the cocktail sort algorithm
         1 step of the cocktail sort algorithm is implemented, and updates the number array accordingly,

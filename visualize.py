@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import sort as srt
 import numpy as np
+from collections import defaultdict
 
 cs = "cocktailsort"
 ss = "selectionsort"
@@ -16,6 +17,10 @@ def visualize(x):
     n = len(x)
     fig, ax = plt.subplots(n, 1)
     b = [0] * n
+    steps = defaultdict(lambda: 0)     # keeps track of the number of steps for the algorithms to sort
+    # keeps track of which algorithms are done sorting.
+    # Makes running animation faster since sorted arrays need not be updated
+    sorted_display = [False] * n
     if n == 1:
         ax = [ax]
     for i in range(n):
@@ -24,18 +29,23 @@ def visualize(x):
         ax[i].set_title(x[i].sort_type())
 
     def animate(k):
-        for bi in b:
-            bi.remove()
         for j in range(n):
             if x[j].is_sorted():
-                b[j] = ax[j].bar(range(x[j].size()), x[j].data(), align='center', alpha=0.5, color='green')
+                if not sorted_display[j]:
+                    b[j].remove()   # remove existing bar plot
+                    time_label = "Step Count: %s" % str(steps[j])
+                    ax[j].text(3, 8, time_label)
+                    b[j] = ax[j].bar(range(x[j].size()), x[j].data(), align='center', alpha=0.5, color='green')
+                    sorted_display[j] = True
             else:
+                b[j].remove()
                 x[j].update()
+                steps[j] += 1   # increment the number of steps
                 b[j] = ax[j].bar(range(x[j].size()), x[j].data(), align='center', alpha=0.5, color='black')
                 b[j][x[j].get_current()].set_color('r')
         return b,
 
-    ani = animation.FuncAnimation(fig, animate, frames=100, repeat=True, blit=False, interval=1)
+    ani = animation.FuncAnimation(fig, animate, frames=100, blit=False, interval=1)
     plt.show()
 
 
@@ -53,11 +63,13 @@ def single_init(alg, size):
     visualize([x])
 
 
-def three_init(size, reverse=False, nearly_sorted=False, few_unique=False):
+def three_init(size=20, reverse=False, nearly_sorted=False, few_unique=False):
     """
     the idea using the types of lists used were taken from https://www.toptal.com/developers/sorting-algorithms
     creates an animation of the 3 algorithms sorting the same array side-by-side
     NOTE: this does not show the actually relative time complexity of the 3 algorithms!
+    additional parameters allows user to specify the type of array to be sorted.
+    If parameters are empty, then a random array is generated.
     """
     d = np.random.randint(0, 100, size)
     if reverse:
@@ -75,11 +87,10 @@ def three_init(size, reverse=False, nearly_sorted=False, few_unique=False):
             d1 = np.empty(count)
             d1.fill(num)
             d = np.concatenate([d,d1])
-            print(d)
         np.random.shuffle(d)
-        
+
     x = [srt.BubbleSort(data=d), srt.CocktailSort(data=d), srt.SelectionSort(data=d)]
     visualize(x)
 
 
-three_init(size=20,few_unique=True)
+three_init(size=20, few_unique=True)
