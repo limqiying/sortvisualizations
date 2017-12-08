@@ -141,8 +141,10 @@ class CocktailSort(Sort):
         self._current = 0
         self._forward = True
         self._start = 0
+        self._end = self.size()
 
     def update(self):
+        print(self._start)
         """
         implements the cocktail sort algorithm
         1 step of the cocktail sort algorithm is implemented, and updates the number array accordingly,
@@ -160,14 +162,16 @@ class CocktailSort(Sort):
         updates position of the current pointer index
         """
         if self._forward:
-            if self._current+1 < self._size-1:
+            if self._current+1 < self._end - 1:
                 self._current += 1
             else:
                 self._forward = False
+                self._end -= 1
         else:
             if self._current - 1 > self._start - 1:
                 self._current -= 1
             else:
+                self._start += 1
                 self._forward = True
 
     @staticmethod

@@ -53,16 +53,33 @@ def single_init(alg, size):
     visualize([x])
 
 
-def three_init(size):
+def three_init(size, reverse=False, nearly_sorted=False, few_unique=False):
     """
+    the idea using the types of lists used were taken from https://www.toptal.com/developers/sorting-algorithms
     creates an animation of the 3 algorithms sorting the same array side-by-side
     NOTE: this does not show the actually relative time complexity of the 3 algorithms!
     """
     d = np.random.randint(0, 100, size)
+    if reverse:
+        d = np.sort(d)[::-1]
+    if nearly_sorted:
+        g = np.random.choice(size, size//4)
+        d.sort()
+        for index in g:
+            d[index] = np.random.randint(0,100)
+    if few_unique:
+        d = np.array([])
+        while len(d) < size:
+            num = np.random.randint(0, 100)
+            count = np.random.randint(0, size//4)
+            d1 = np.empty(count)
+            d1.fill(num)
+            d = np.concatenate([d,d1])
+            print(d)
+        np.random.shuffle(d)
+        
     x = [srt.BubbleSort(data=d), srt.CocktailSort(data=d), srt.SelectionSort(data=d)]
     visualize(x)
 
 
-
-
-three_init(size=20)
+three_init(size=20,few_unique=True)
