@@ -48,7 +48,7 @@ class Sort:
 class BubbleSort(Sort):
 
     def __init__(self, data=None, size=15):
-        super().__init__(data=data, size=size)
+        Sort.__init__(self, data=data, size=size)
         self._i = 0
         self._j = 0
 
@@ -93,7 +93,7 @@ class BubbleSort(Sort):
 class SelectionSort(Sort):
 
     def __init__(self, data=None, size=15):
-        super().__init__(data=data, size=size)
+        Sort.__init__(self, data=data, size=size)
         self._current = 0   # pointer to where the algorithm is at
         self._min = 0   # pointer to the index at where the current minimum is at
         self._sorting_index = 0     # keeps track of the index up to where the list has been sorted
@@ -137,7 +137,7 @@ class SelectionSort(Sort):
 class CocktailSort(Sort):
 
     def __init__(self, data=None, size=15):
-        super().__init__(data=data, size=size)
+        Sort.__init__(self, data=data, size=size)
         self._current = 0
         self._forward = True
         self._start = 0
