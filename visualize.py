@@ -82,8 +82,6 @@ def three_init(size=20, reverse=False, nearly_sorted=False, few_unique=False):
     x = [srt.BubbleSort(data=d), srt.CocktailSort(data=d), srt.SelectionSort(data=d)]
     visualize(x)
 
-<<<<<<< HEAD
-
 def reverse_array(size):
     """
     generates a random array that is sorted-reverse
