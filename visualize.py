@@ -82,6 +82,7 @@ def three_init(size=20, reverse=False, nearly_sorted=False, few_unique=False):
     x = [srt.BubbleSort(data=d), srt.CocktailSort(data=d), srt.SelectionSort(data=d)]
     visualize(x)
 
+<<<<<<< HEAD
 
 def reverse_array(size):
     """
@@ -118,4 +119,3 @@ def few_unique_array(size):
     return d
 
 single_init(bs,size=10)
-
