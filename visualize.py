@@ -92,7 +92,3 @@ def three_init(size=20, reverse=False, nearly_sorted=False, few_unique=False):
     x = [srt.BubbleSort(data=d), srt.CocktailSort(data=d), srt.SelectionSort(data=d)]
     visualize(x)
 
-three_init(size=20)
-
-three_init(size=20, few_unique=True)
-
