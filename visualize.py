@@ -77,6 +77,8 @@ def three_init(size=20, reverse=False, nearly_sorted=False, few_unique=False):
         d = nearly_sorted_array(size)
     if few_unique:
         d = few_unique_array(size)
+    else:
+        d = np.random.randint(0, 100, size)
     x = [srt.BubbleSort(data=d), srt.CocktailSort(data=d), srt.SelectionSort(data=d)]
     visualize(x)
 
@@ -115,4 +117,5 @@ def few_unique_array(size):
     np.random.shuffle(d)
     return d
 
-three_init(20, reverse=True)
+single_init(bs,size=10)
+
