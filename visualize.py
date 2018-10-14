@@ -116,5 +116,3 @@ def few_unique_array(size):
         d = np.concatenate([d, d1])
     np.random.shuffle(d)
     return d
-
-single_init(bs,size=10)

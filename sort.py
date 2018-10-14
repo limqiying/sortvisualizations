@@ -110,7 +110,7 @@ class SelectionSort(Sort):
                 self._min = self._current
             # if we have reached the end of the list, then swap the smallest element we find to the front of our array
             if self._current == self.size()-1:
-                # swap the smallest element in the list with the item at the fro
+                # swap the smallest element in the list with the item at the front
                 self._data[self._min], self._data[self._sorting_index] = self._data[self._sorting_index], self._data[self._min]
                 self._sorting_index += 1    # update sorting index since now one more element is sorted
                 self._min = self._sorting_index
