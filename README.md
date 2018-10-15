@@ -12,4 +12,4 @@ Users are able to see, and compare how each method performs when the given list:
 - is mostly sorted
 - has very few unique items
     
-![tool-in-use](https://gph.is/2QOKndy)
+![tool-in-use](https://media.giphy.com/media/3xIwLGsFdnOfQtSoj4/giphy.gif)
