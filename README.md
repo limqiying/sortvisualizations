@@ -1,7 +1,8 @@
 # Sort Visualizations
 Authors: Tia Qiying Lim, Jiacheng Xu
 
-![Alt Text](https://media.giphy.com/media/3xIwLGsFdnOfQtSoj4/giphy.gif)
+![Alt Text](https://media.giphy.com/media/SLaJqMM5IL2cHjgXsx/giphy.gif)
+
 
 This tool offers an interactive way to visualize the three sorting algorithms:
    - Bubble Sort
